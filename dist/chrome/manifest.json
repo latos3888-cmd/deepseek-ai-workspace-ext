@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "DeepSeek AI Workspace",
+  "version": "1.0.0",
+  "description": "Transform DeepSeek into a powerful AI workspace with projects, memory, and tools.",
+  "permissions": [
+    "sidePanel",
+    "storage",
+    "contextMenus",
+    "tabs",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://chat.deepseek.com/*",
+    "https://api.deepseek.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background/index.js"
+  },
+  "action": {
+    "default_title": "Open DeepSeek Workspace"
+  },
+  "side_panel": {
+    "default_path": "src/sidebar/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/content/index.js"
+      ]
+    }
+  ],
+  "icons": {
+    "48": "assets/icon-48.png",
+    "128": "assets/icon-128.png"
+  }
+}
