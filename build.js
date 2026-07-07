@@ -17,13 +17,24 @@ function build(browser) {
   if (browser === 'firefox') {
     // Convert to Firefox format
     delete manifest.side_panel;
+    
+    // Firefox MV3 uses background.scripts instead of service_worker
+    const backgroundScript = manifest.background.service_worker;
+    delete manifest.background.service_worker;
+    manifest.background.scripts = [backgroundScript];
+    
+    // Remove Chrome-only permissions
+    manifest.permissions = manifest.permissions.filter(p => p !== 'sidePanel');
+    
     manifest.sidebar_action = {
       default_panel: "src/sidebar/index.html",
       default_title: "DeepSeek Workspace"
     };
+    
     manifest.browser_specific_settings = {
       gecko: {
-        id: "workspace@deepseek.ai"
+        id: "workspace@deepseek.ai",
+        strict_min_version: "109.0"
       }
     };
   }
