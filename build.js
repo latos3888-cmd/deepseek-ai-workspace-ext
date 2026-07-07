@@ -37,6 +37,8 @@ function build(browser) {
         strict_min_version: "109.0"
       }
     };
+    // Mandatory for Firefox validation
+    manifest.browser_specific_settings.gecko.data_collection_permissions = false;
   }
 
   fs.writeFileSync(path.join(distDir, 'manifest.json'), JSON.stringify(manifest, null, 2));
