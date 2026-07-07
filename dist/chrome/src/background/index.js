@@ -8,8 +8,8 @@ chrome.runtime.onInstalled.addListener(() => {
     contexts: ["selection"]
   });
 
-  // Set default side panel behavior
-  if (chrome.sidePanel) {
+  // Set default side panel behavior (Chrome only)
+  if (typeof chrome !== 'undefined' && chrome.sidePanel && chrome.sidePanel.setPanelBehavior) {
     chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true })
       .catch((error) => console.error(error));
   }
@@ -25,8 +25,11 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     });
     
     // Ensure side panel is open
-    if (chrome.sidePanel) {
+    if (typeof chrome !== 'undefined' && chrome.sidePanel && chrome.sidePanel.open) {
       chrome.sidePanel.open({ windowId: tab.windowId });
+    } else if (typeof browser !== 'undefined' && browser.sidebarAction && browser.sidebarAction.open) {
+      // Firefox specific opening if available
+      browser.sidebarAction.open();
     }
   }
 });
