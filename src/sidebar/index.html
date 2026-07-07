@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeepSeek AI Workspace</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <div class="logo">DeepSeek Workspace</div>
+      <div class="actions">
+        <select id="language-switch">
+          <option value="en">English</option>
+          <option value="zh">中文</option>
+        </select>
+        <button id="settings-btn">⚙️</button>
+      </div>
+    </header>
+
+    <nav>
+      <button class="nav-item active" data-view="chat">Chat</button>
+      <button class="nav-item" data-view="projects">Projects</button>
+      <button class="nav-item" data-view="prompts">Prompts</button>
+      <button class="nav-item" data-view="notes">Notes</button>
+    </nav>
+
+    <main id="content-area">
+      <!-- Chat View -->
+      <section id="chat-view" class="view">
+        <div id="chat-messages"></div>
+        <div class="input-area">
+          <textarea id="user-input" placeholder="Type your message..."></textarea>
+          <button id="send-btn">Send</button>
+        </div>
+      </section>
+
+      <!-- Other views will be rendered here dynamically -->
+    </main>
+
+    <footer>
+      <div id="status-bar">Ready</div>
+    </footer>
+  </div>
+  <script src="main.js" type="module"></script>
+</body>
+</html>
