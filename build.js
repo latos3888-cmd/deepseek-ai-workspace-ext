@@ -34,11 +34,13 @@ function build(browser) {
     manifest.browser_specific_settings = {
       gecko: {
         id: "workspace@deepseek.ai",
-        strict_min_version: "109.0"
+        strict_min_version: "128.0", // Recommended minimum version for new extensions
+        data_collection_permissions: {
+          required: ["none"],
+          optional: ["technicalAndInteraction"]
+        }
       }
     };
-    // Mandatory for Firefox validation
-    manifest.browser_specific_settings.gecko.data_collection_permissions = false;
   }
 
   fs.writeFileSync(path.join(distDir, 'manifest.json'), JSON.stringify(manifest, null, 2));
